@@ -1,0 +1,16 @@
+lass Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+    if (nums.size() == 0) return 0;
+
+        int i = 0;  // slow pointer → last unique element
+        for (int k = 1; k < nums.size(); k++) {  // fast pointer → scanning next element
+            if (nums[k] != nums[i]) {           // new unique element found
+                i++;                            // move slow pointer
+                nums[i] = nums[k];             // overwrite duplicate
+            }
+        }
+
+        return i + 1; // total unique elements    
+    }
+};
