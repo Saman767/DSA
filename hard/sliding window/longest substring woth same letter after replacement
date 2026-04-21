@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        int freq[26] = {0};   // har char ki count window mein
+    int left = 0;
+    int maxFreq = 0;      // window ka dominant char count
+    int result = 0;
+
+    for (int right = 0; right < s.size(); right++) {
+        freq[s[right] - 'A']++;
+        maxFreq = max(maxFreq, freq[s[right] - 'A']);
+
+        // replacements needed = (window size) - maxFreq
+        int windowSize = right - left + 1;
+        if (windowSize - maxFreq > k) {
+            // window invalid → shrink from left
+            freq[s[left] - 'A']--;
+            left++;
+        }
+
+        result = max(result, right - left + 1);
+    }
+
+    return result;
+        
+    }
+};
